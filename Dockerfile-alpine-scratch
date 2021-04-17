@@ -1,0 +1,5 @@
+FROM lupusmichaelis/resolve:alpine AS build
+
+FROM scratch
+COPY --from=build resolve /resolve
+CMD ["/resolve"]
