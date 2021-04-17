@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    alpine:
+        build:
+            context: .
+            dockerfile: Dockerfile-alpine
+        image: lupusmichaelis/resolve:alpine
+
+    alpine-scratch:
+        build:
+            context: .
+            dockerfile: Dockerfile-alpine-scratch
+        image: lupusmichaelis/resolve:alpine-scratch
+        depends_on:
+            - alpine
+
+    debian:
+        build:
+            context: .
+            dockerfile: Dockerfile-debian
+        image: lupusmichaelis/resolve:debian
+
+    debian-scratch:
+        build:
+            context: .
+            dockerfile: Dockerfile-debian-scratch
+        image: lupusmichaelis/resolve:debian-scratch
+        depends_on:
+            - debian
