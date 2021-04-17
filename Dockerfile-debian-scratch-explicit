@@ -1,0 +1,15 @@
+FROM debian:buster as build
+
+RUN apt update \
+    && apt dist-upgrade -y \
+    && apt install -y gcc libc-dev \
+    && apt clean \
+    && apt autoclean
+
+COPY resolve.c .
+RUN cc -o /resolve resolve.c && strip resolve && rm resolve.c
+RUN apt -y --purge remove gcc .*-dev > /dev/null
+
+FROM scratch
+COPY --from=build resolve /resolve
+CMD ["/resolve"]
