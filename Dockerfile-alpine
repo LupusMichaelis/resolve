@@ -1,0 +1,10 @@
+FROM alpine:3.12
+
+RUN apk update \
+	&& apk upgrade --no-cache \
+	&& apk add --no-cache gcc libc-dev
+
+COPY resolve.c .
+RUN cc -o /resolve resolve.c && strip resolve && rm resolve.c
+RUN apk del gcc libc-dev
+CMD ["/resolve"]
