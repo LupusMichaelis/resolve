@@ -1,0 +1,9 @@
+FROM alpine:3.12 AS build
+
+RUN apk add gcc libc-dev
+COPY resolve.c .
+RUN cc -o resolve resolve.c -static && strip resolve
+
+FROM scratch
+COPY --from=build resolve /resolve
+CMD ["/resolve"]

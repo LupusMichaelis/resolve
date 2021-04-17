@@ -29,6 +29,12 @@ services:
         depends_on:
             - debian
 
+    alpine-scratch-explicit:
+        build:
+            context: .
+            dockerfile: Dockerfile-alpine-scratch-explicit
+        image: lupusmichaelis/resolve:alpine-scratch-explicit
+
     debian-scratch-explicit:
         build:
             context: .
